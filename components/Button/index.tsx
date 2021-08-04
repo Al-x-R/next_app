@@ -5,13 +5,14 @@ import { ButtonProps } from './Button.props';
 
 import styles from './Button.module.css';
 
-const Button = ({ children, appearance }: ButtonProps): JSX.Element => {
+const Button = ({ children, appearance, className, ...props }: ButtonProps): JSX.Element => {
   return (
     <button
-      className={clsx(styles.button, {
+      className={clsx(styles.button, className, {
         [styles.primary]: appearance === 'primary',
         [styles.ghost]: appearance === 'ghost',
       })}
+      {...props}
     >
       {children}
     </button>
