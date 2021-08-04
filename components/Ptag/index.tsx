@@ -5,7 +5,7 @@ import { PtagProps } from './Ptag.props';
 
 import styles from './Ptag.module.css';
 
-const Index = ({ size = 'm', children, className, ...props }: PtagProps): JSX.Element => {
+const Ptag = ({ size = 'm', children, className, ...props }: PtagProps): JSX.Element => {
   return (
     <p className={clsx(styles.p, className, {
       [styles.s]: size === 's',
@@ -18,4 +18,4 @@ const Index = ({ size = 'm', children, className, ...props }: PtagProps): JSX.El
   );
 };
 
-export default Index;
+export default Ptag;

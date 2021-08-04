@@ -4,7 +4,7 @@ import { HtagProps } from './Htag.props';
 
 import styles from './Htag.module.css';
 
-const Index = ({ tag, children }: HtagProps): JSX.Element => {
+const Htag = ({ tag, children }: HtagProps): JSX.Element => {
   switch (tag) {
     case 'h1':
       return <h1 className={styles.h1}>{children}</h1>;
@@ -17,4 +17,4 @@ const Index = ({ tag, children }: HtagProps): JSX.Element => {
   }
 };
 
-export default Index;
+export default Htag;
