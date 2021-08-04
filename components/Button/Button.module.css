@@ -34,3 +34,14 @@
 	border: 1px solid var(--grey-light);
 	background-color: var(--primary);
 }
+
+.arrow {
+	display: inline-block;
+
+	margin-left: 10px;
+}
+
+.down {
+	transition: all 0.2s;
+	transform: rotate(90deg);
+}
