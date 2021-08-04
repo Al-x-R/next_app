@@ -45,3 +45,8 @@
 	transition: all 0.2s;
 	transform: rotate(90deg);
 }
+
+.primary svg,
+.ghost:hover svg {
+	fill: var(--white);
+}
