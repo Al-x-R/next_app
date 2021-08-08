@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import clsx from 'clsx';
 
 import Header from './Header';
@@ -22,4 +22,12 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
   );
 };
 
-export default Layout;
+export const withLayout = <T extends Record<string, unknown>>(Component: FC<T>) => {
+  return function withLayoutComponent(props: T): JSX.Element {
+    return (
+      <Layout>
+        <Component {...props} />
+      </Layout>
+    );
+  };
+};
