@@ -25,13 +25,13 @@
 
 .ghost {
 	color: var(--black);
-	border: 1px solid var(--grey-light);
+	border: 1px solid var(--gray-light);
 	background: none;
 }
 
 .ghost:hover {
 	color: var(--white);
-	border: 1px solid var(--grey-light);
+	border: 1px solid var(--gray-light);
 	background-color: var(--primary);
 }
 
