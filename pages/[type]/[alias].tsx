@@ -9,6 +9,12 @@ import { ProductModel } from '../../interfaces/product.interface';
 import { firstLevelMenu } from '../../helpers/helpers';
 import { API } from '../../helpers/api';
 
+interface TopPageProps extends Record<string, unknown> {
+  menu: MenuItem[];
+  firstCategory: TopLevelCategory;
+  page: TopPageModel;
+  products: ProductModel[];
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
   let paths: string[] = [];
@@ -74,10 +80,3 @@ export const getStaticProps: GetStaticProps<TopPageProps> = async ({ params }: G
   }
 
 };
-
-interface TopPageProps extends Record<string, unknown> {
-  menu: MenuItem[];
-  firstCategory: TopLevelCategory;
-  page: TopPageModel;
-  products: ProductModel[];
-}
