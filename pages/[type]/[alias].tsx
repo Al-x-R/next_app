@@ -3,11 +3,13 @@ import React from 'react';
 import axios from 'axios';
 import { ParsedUrlQuery } from 'querystring';
 
-import { MenuItem } from '../../interfaces/menu.interface';
-import { TopLevelCategory, TopPageModel } from '../../interfaces/page.interface';
-import { ProductModel } from '../../interfaces/product.interface';
-import { firstLevelMenu } from '../../helpers/helpers';
 import { API } from '../../helpers/api';
+import { withLayout } from '../../layout';
+import { firstLevelMenu } from '../../helpers/helpers';
+import { MenuItem } from '../../interfaces/menu.interface';
+import { ProductModel } from '../../interfaces/product.interface';
+import { TopLevelCategory, TopPageModel } from '../../interfaces/page.interface';
+import { TopPageComponent } from '../../page-components/TopPageComponent';
 
 interface TopPageProps extends Record<string, unknown> {
   menu: MenuItem[];
@@ -15,6 +17,12 @@ interface TopPageProps extends Record<string, unknown> {
   page: TopPageModel;
   products: ProductModel[];
 }
+
+function TopPage({ firstCategory, page, products}: TopPageProps): JSX.Element {
+  return <TopPageComponent firstCategory={firstCategory} page={page} products={products} />;
+}
+
+export default withLayout(TopPage);
 
 export const getStaticPaths: GetStaticPaths = async () => {
   let paths: string[] = [];
