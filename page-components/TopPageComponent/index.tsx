@@ -2,6 +2,7 @@ import { TopPageComponentProps } from './TopPageComponent.props';
 import Htag from '../../components/Htag';
 import Tag from '../../components/Tag';
 import VacancyData from '../../components/VacancyData';
+import { TopLevelCategory } from '../../interfaces/page.interface';
 
 import styles from './TopPageComponent.module.css';
 
@@ -31,7 +32,7 @@ export const TopPageComponent = ({ page, products, firstCategory}: TopPageCompon
         <Htag tag='h2'>Вакансии - {page.category}</Htag>
         <Tag color='red' size='m'>hh.ru</Tag>
       </div>
-      <VacancyData {...page.hh} />
+      {firstCategory == TopLevelCategory.Courses && page.hh && <VacancyData {...page.hh} />}
     </div>
   );
 };
