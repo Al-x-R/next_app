@@ -3,6 +3,7 @@ import Htag from '../../components/Htag';
 import Tag from '../../components/Tag';
 import VacancyData from '../../components/VacancyData';
 import { TopLevelCategory } from '../../interfaces/page.interface';
+import Advantages from '../../components/Advantages';
 
 import styles from './TopPageComponent.module.css';
 
@@ -33,6 +34,11 @@ export const TopPageComponent = ({ page, products, firstCategory}: TopPageCompon
         <Tag color='red' size='m'>hh.ru</Tag>
       </div>
       {firstCategory == TopLevelCategory.Courses && page.hh && <VacancyData {...page.hh} />}
+      {page.advantages && page.advantages.length > 0 && <>
+		    <Htag tag='h2'>Преимущства</Htag>
+		    <Advantages advantages={page.advantages} />
+	    </>
+      }
     </div>
   );
 };
