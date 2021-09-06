@@ -35,10 +35,11 @@ export const TopPageComponent = ({ page, products, firstCategory}: TopPageCompon
       </div>
       {firstCategory == TopLevelCategory.Courses && page.hh && <VacancyData {...page.hh} />}
       {page.advantages && page.advantages.length > 0 && <>
-		    <Htag tag='h2'>Преимущства</Htag>
-		    <Advantages advantages={page.advantages} />
-	    </>
+        <Htag tag='h2'>Преимущства</Htag>
+        <Advantages advantages={page.advantages} />
+        </>
       }
+      {page.seoText && <div className={styles.seo} dangerouslySetInnerHTML={{ __html: page.seoText }} />}
     </div>
   );
 };
