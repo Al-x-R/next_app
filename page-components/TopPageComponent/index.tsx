@@ -4,6 +4,8 @@ import Tag from '../../components/Tag';
 import VacancyData from '../../components/VacancyData';
 import { TopLevelCategory } from '../../interfaces/page.interface';
 import Advantages from '../../components/Advantages';
+import Sort from '../../components/Sort';
+import { SortEnum } from '../../components/Sort/Sort.props';
 
 import styles from './TopPageComponent.module.css';
 
@@ -22,7 +24,7 @@ export const TopPageComponent = ({ page, products, firstCategory}: TopPageCompon
           {products.length}
           </Tag>
         }
-        <div>sort</div>
+        <Sort sort={SortEnum.Price} setSort={() => console.log('sort')} />
       </div>
       <div>
         {products && products.map(p => (
