@@ -10,6 +10,7 @@ import Tag from '../components/Tag';
 import Rating from '../components/Rating';
 import { API } from '../helpers/api';
 import { MenuItem } from '../interfaces/menu.interface';
+import { Input } from '../components/Input';
 
 function Home({ menu, firstCategory }: HomeProps): JSX.Element {
 
@@ -30,8 +31,7 @@ function Home({ menu, firstCategory }: HomeProps): JSX.Element {
           <Tag size='m' color='green'>Medium green</Tag>
           <Tag size='m' color='primary'>Medium green</Tag>
           <Rating rating={rating} isEditable={true} setRating={setRating}/>
-
-
+          <Input />
       </>
       );
 }
