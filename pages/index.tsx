@@ -10,7 +10,7 @@ import Tag from '../components/Tag';
 import Rating from '../components/Rating';
 import { API } from '../helpers/api';
 import { MenuItem } from '../interfaces/menu.interface';
-import { Input } from '../components/Input';
+import Input from '../components/Input';
 import { Textarea } from '../components/Textarea';
 
 function Home({ menu, firstCategory }: HomeProps): JSX.Element {

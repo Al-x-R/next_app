@@ -7,6 +7,7 @@ import { SidebarProps } from './Sidebar.props';
 import Logo from '../logo.svg';
 
 import styles from './Sidebar.module.css';
+import Search from '../../components/Search';
 
 
 const Sidebar = ({ className, ...props }: SidebarProps): JSX.Element => {
@@ -15,7 +16,7 @@ const Sidebar = ({ className, ...props }: SidebarProps): JSX.Element => {
   return (
     <div className={clsx(className, styles.sidebar)} {...props}>
       <Logo className={styles.logo} />
-      <div>search</div>
+      <Search />
       <Menu />
     </div>
   );
