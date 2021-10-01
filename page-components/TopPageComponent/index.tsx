@@ -9,6 +9,7 @@ import Advantages from '../../components/Advantages';
 import Sort from '../../components/Sort';
 import { SortEnum } from '../../components/Sort/Sort.props';
 import { sortReducer } from './sort.reducer';
+import Product from '../../components/Product';
 
 import styles from './TopPageComponent.module.css';
 
@@ -41,7 +42,7 @@ export const TopPageComponent = ({ page, products, firstCategory}: TopPageCompon
       </div>
       <div>
         {sortedProducts && sortedProducts.map(p => (
-          <div key={p._id}>{p.title}</div>
+          <Product key={p._id} product={p}/>
         ))}
       </div>
       <div className={styles.hhTitle}>
