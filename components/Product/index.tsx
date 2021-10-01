@@ -7,12 +7,13 @@ import Rating from '../Rating';
 import Tag from '../Tag';
 import Divider from '../Divider';
 import Button from '../Button';
+import Review from '../Review';
+import ReviewForm from '../ReviewForm';
 
 import { ProductProps } from './Product.props';
 import { declOfNum, priceRu } from '../../helpers/helpers';
 
 import styles from './Product.module.css';
-import Review from '../Review';
 
 const Product = ({ product, className, ...props }: ProductProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
     const [isReviewOpened, setIsReviewOpened] = useState<boolean>(false);
@@ -100,6 +101,7 @@ const Product = ({ product, className, ...props }: ProductProps, ref: ForwardedR
                         <Divider />
                     </div>
                 ))}
+                <ReviewForm productId={product._id} isOpened={isReviewOpened} />
             </Card>
         </div>
     );
