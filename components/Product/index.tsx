@@ -12,6 +12,7 @@ import { ProductProps } from './Product.props';
 import { declOfNum, priceRu } from '../../helpers/helpers';
 
 import styles from './Product.module.css';
+import Review from '../Review';
 
 const Product = ({ product, className, ...props }: ProductProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
     const [isReviewOpened, setIsReviewOpened] = useState<boolean>(false);
@@ -91,6 +92,14 @@ const Product = ({ product, className, ...props }: ProductProps, ref: ForwardedR
                         aria-expanded={isReviewOpened}
                     >Читать отзывы</Button>
                 </div>
+            </Card>
+            <Card color='blue' className={styles.reviews} ref={reviewRef} tabIndex={isReviewOpened ? 0 : -1}>
+                {product.reviews.map(r => (
+                    <div key={r._id}>
+                        <Review review={r} />
+                        <Divider />
+                    </div>
+                ))}
             </Card>
         </div>
     );
