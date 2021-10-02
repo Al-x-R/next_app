@@ -66,7 +66,7 @@ const Rating = forwardRef(({ isEditable = false, rating, setRating, error, ...pr
   };
 
   return (
-    <div {...props}>
+    <div {...props} ref={ref}>
       {ratingArray.map((r, i) => (
         <span key={i}>{r}</span>
       ))}
