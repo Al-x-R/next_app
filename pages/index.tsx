@@ -12,6 +12,7 @@ import { API } from '../helpers/api';
 import { MenuItem } from '../interfaces/menu.interface';
 import Input from '../components/Input';
 import { Textarea } from '../components/Textarea';
+import ReviewForm from '../components/ReviewForm';
 
 function Home({ menu, firstCategory }: HomeProps): JSX.Element {
 
@@ -34,6 +35,7 @@ function Home({ menu, firstCategory }: HomeProps): JSX.Element {
           <Rating rating={rating} isEditable={true} setRating={setRating}/>
           <Input />
           <Textarea />
+          <ReviewForm productId={'graphic-design'} isOpened={true} />
       </>
       );
 }

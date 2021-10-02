@@ -33,7 +33,6 @@ const Rating = forwardRef(({ isEditable = false, rating, setRating, error, ...pr
           aria-valuemin={1}
         >
           <StarIcon
-
             tabIndex={isEditable ? 0 : -1}
             onKeyDown={(e: KeyboardEvent<SVGElement>) => isEditable && handleSpace(e, i)}
           />
@@ -66,7 +65,9 @@ const Rating = forwardRef(({ isEditable = false, rating, setRating, error, ...pr
   };
 
   return (
-    <div {...props} ref={ref}>
+    <div {...props} ref={ref} className={clsx(styles.ratingWrapper, {
+      [styles.error]: error
+    })}>
       {ratingArray.map((r, i) => (
         <span key={i}>{r}</span>
       ))}
