@@ -1,4 +1,4 @@
-import React, { useEffect, useState, KeyboardEvent } from 'react';
+import React, { useEffect, useState, KeyboardEvent, forwardRef, ForwardedRef, useRef } from 'react';
 import clsx from 'clsx';
 
 import { RatingProps } from './Rating.props';
@@ -6,8 +6,9 @@ import StarIcon from './star.svg';
 
 import styles from './Rating.module.css';
 
-const Rating = ({ isEditable = false, rating, setRating, ...props }: RatingProps): JSX.Element => {
+const Rating = forwardRef(({ isEditable = false, rating, setRating, ...props }: RatingProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
   const [ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill(<></>));
+  const ratingArrayRef = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     constructRating(rating);
@@ -24,6 +25,7 @@ const Rating = ({ isEditable = false, rating, setRating, ...props }: RatingProps
           onMouseEnter={() => changeDisplayRating(i + 1)}
           onMouseLeave={() => changeDisplayRating(rating)}
           onClick={() => changeRating(i)}
+          ref={r => ratingArrayRef.current?.push(r)}
         >
           <StarIcon
 
@@ -65,6 +67,6 @@ const Rating = ({ isEditable = false, rating, setRating, ...props }: RatingProps
       ))}
     </div>
   );
-};
+});
 
 export default Rating;
