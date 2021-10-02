@@ -6,7 +6,7 @@ import StarIcon from './star.svg';
 
 import styles from './Rating.module.css';
 
-const Rating = forwardRef(({ isEditable = false, rating, setRating, ...props }: RatingProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
+const Rating = forwardRef(({ isEditable = false, rating, setRating, error, ...props }: RatingProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
   const [ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill(<></>));
   const ratingArrayRef = useRef<(HTMLSpanElement | null)[]>([]);
 
@@ -26,6 +26,11 @@ const Rating = forwardRef(({ isEditable = false, rating, setRating, ...props }: 
           onMouseLeave={() => changeDisplayRating(rating)}
           onClick={() => changeRating(i)}
           ref={r => ratingArrayRef.current?.push(r)}
+          aria-invalid={error ? true : false}
+          aria-valuenow={rating}
+          aria-valuemax={5}
+          aria-label={isEditable ? 'Укажите рейтинг' : ('рейтинг' + rating)}
+          aria-valuemin={1}
         >
           <StarIcon
 
@@ -65,6 +70,7 @@ const Rating = forwardRef(({ isEditable = false, rating, setRating, ...props }: 
       {ratingArray.map((r, i) => (
         <span key={i}>{r}</span>
       ))}
+      {error && <span role="alert" className={styles.errorMessage}>{error.message}</span>}
     </div>
   );
 });
