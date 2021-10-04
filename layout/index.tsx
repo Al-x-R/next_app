@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import clsx from 'clsx';
 
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
+import Up from '../components/Up';
 import { LayoutProps } from './Layout.props';
 
 import styles from './Layout.module.css';
@@ -19,6 +19,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
         {children}
       </div>
       <Footer className={styles.footer} />
+        <Up />
     </div>
   );
 };
