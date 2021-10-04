@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { format } from 'date-fns';
+import { motion, useReducedMotion } from 'framer-motion';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -13,6 +13,26 @@ import styles from './Menu.module.css';
 const Menu = (): JSX.Element => {
   const { menu, firstCategory, setMenu } = useContext(AppContext);
   const router = useRouter();
+  const shouldReduceMotion = useReducedMotion();
+
+  const variants = {
+    visible: {
+      marginBottom: 20,
+      transition: shouldReduceMotion ? {} : {
+        when: 'beforeChildren',
+        staggerChildren: 0.1
+      }
+    },
+    hidden: { marginBottom: 0 }
+  };
+
+  const variantsChildren = {
+    visible: {
+      opacity: 1,
+      height: 29
+    },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, height: 0 }
+  };
 
   const openSecondLevel = (secondCategory: string) => {
     setMenu && setMenu(menu.map(m => {
@@ -56,11 +76,13 @@ const Menu = (): JSX.Element => {
           return (
             <div key={m._id.secondCategory}>
               <div className={styles.secondLevel} onClick={() => openSecondLevel(m._id.secondCategory)}>{m._id.secondCategory}</div>
-              <div className={clsx(styles.secondLevelBlock, {
-                [styles.secondLevelBlockOpened]: m.isOpened
-              })}>
+              <motion.div className={styles.secondLevelBlock}
+                          layout
+                          variants={variants}
+                          initial={m.isOpened ? 'visible' : 'hidden'}
+                          animate={m.isOpened ? 'visible' : 'hidden'}>
                 {buildThirdLevelMenu(m.pages, menuItem.route)}
-              </div>
+              </motion.div>
             </div>
           );
         })}
@@ -71,14 +93,15 @@ const Menu = (): JSX.Element => {
   const buildThirdLevelMenu = (pages: PageItem[], route: string) => {
     return (
       pages.map(page => (
-        <Link href={`/${route}/${page.alias}`} key={page._id}>
-          <a className={clsx(styles.thirdLevel, {
-            [styles.thirdLevelActive]: false
-          })}>
-            {page.category}
-          </a>
-        </Link>
-
+          <motion.div key={page._id} variants={variantsChildren}>
+            <Link href={`/${route}/${page.alias}`} >
+              <a className={clsx(styles.thirdLevel, {
+                [styles.thirdLevelActive]: false
+              })}>
+                {page.category}
+              </a>
+            </Link>
+          </motion.div>
       ))
     );
   };
