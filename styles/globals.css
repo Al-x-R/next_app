@@ -21,12 +21,13 @@ a {
 
 :root {
 	--black: #3B434E;
-	--gray: #A4A4A4;
 	--gray-light: #EBEBEB;
+	--gray: #A4A4A4;
 	--gray-dark: #6C7077;
 	--white: #FFF;
-	--primary: #7653FC;
-	--primary-hover: #5731EC;
+	--primary: #7351F5;
+	--primary-hover: #6344DF;
+	--red-light: #FEA291;
 	--red: #FC836D;
 	--green: #1DC47E;
 	--green-light: #C8F8E4;
