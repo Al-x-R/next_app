@@ -1,4 +1,4 @@
-import React, { useContext, KeyboardEvent } from 'react';
+import React, { useContext, KeyboardEvent, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -90,13 +90,13 @@ const Menu = (): JSX.Element => {
               >
                 {m._id.secondCategory}
               </button>
-              <motion.div className={styles.secondLevelBlock}
+              <motion.ul className={styles.secondLevelBlock}
                           layout
                           variants={variants}
                           initial={m.isOpened ? 'visible' : 'hidden'}
                           animate={m.isOpened ? 'visible' : 'hidden'}>
                 {buildThirdLevelMenu(m.pages, menuItem.route, m.isOpened ?? false)}
-              </motion.div>
+              </motion.ul>
             </li>
           );
         })}
@@ -107,7 +107,7 @@ const Menu = (): JSX.Element => {
   const buildThirdLevelMenu = (pages: PageItem[], route: string, isOpened: boolean) => {
     return (
       pages.map(page => (
-          <motion.div key={page._id} variants={variantsChildren}>
+          <motion.li key={page._id} variants={variantsChildren}>
             <Link href={`/${route}/${page.alias}`} >
               <a className={clsx(styles.thirdLevel, {[styles.thirdLevelActive]: `/${route}/${page.alias}` == router.asPath})}
                  tabIndex={isOpened ? 0 : -1}
@@ -116,7 +116,7 @@ const Menu = (): JSX.Element => {
                 {page.category}
               </a>
             </Link>
-          </motion.div>
+          </motion.li>
       ))
     );
   };
