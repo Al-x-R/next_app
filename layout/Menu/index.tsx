@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, KeyboardEvent } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -43,6 +43,13 @@ const Menu = (): JSX.Element => {
     }));
   };
 
+  const openSecondLevelKey = (key: KeyboardEvent, secondCategory: string) => {
+    if (key.code === 'Space' || key.code === 'Enter') {
+      key.preventDefault();
+      openSecondLevel(secondCategory);
+    }
+  };
+
   const buildFirstLevelMenu = () => {
     return(
       <>
@@ -75,13 +82,19 @@ const Menu = (): JSX.Element => {
 
           return (
             <div key={m._id.secondCategory}>
-              <div className={styles.secondLevel} onClick={() => openSecondLevel(m._id.secondCategory)}>{m._id.secondCategory}</div>
+              <div className={styles.secondLevel}
+                   onClick={() => openSecondLevel(m._id.secondCategory)}
+                   tabIndex={0}
+                   onKeyDown={(key: KeyboardEvent) => openSecondLevelKey(key, m._id.secondCategory)}
+              >
+                {m._id.secondCategory}
+              </div>
               <motion.div className={styles.secondLevelBlock}
                           layout
                           variants={variants}
                           initial={m.isOpened ? 'visible' : 'hidden'}
                           animate={m.isOpened ? 'visible' : 'hidden'}>
-                {buildThirdLevelMenu(m.pages, menuItem.route)}
+                {buildThirdLevelMenu(m.pages, menuItem.route, m.isOpened ?? false)}
               </motion.div>
             </div>
           );
@@ -90,14 +103,14 @@ const Menu = (): JSX.Element => {
     );
   };
 
-  const buildThirdLevelMenu = (pages: PageItem[], route: string) => {
+  const buildThirdLevelMenu = (pages: PageItem[], route: string, isOpened: boolean) => {
     return (
       pages.map(page => (
           <motion.div key={page._id} variants={variantsChildren}>
             <Link href={`/${route}/${page.alias}`} >
-              <a className={clsx(styles.thirdLevel, {
-                [styles.thirdLevelActive]: false
-              })}>
+              <a className={clsx(styles.thirdLevel, {[styles.thirdLevelActive]: `/${route}/${page.alias}` == router.asPath})}
+                 tabIndex={isOpened ? 0 : -1}
+              >
                 {page.category}
               </a>
             </Link>
