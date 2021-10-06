@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import React from 'react';
 import axios from 'axios';
 import { ParsedUrlQuery } from 'querystring';
+import Head from 'next/head';
 
 import { API } from '../../helpers/api';
 import { withLayout } from '../../layout';
@@ -19,7 +20,16 @@ interface TopPageProps extends Record<string, unknown> {
 }
 
 function TopPage({ firstCategory, page, products}: TopPageProps): JSX.Element {
-  return <TopPageComponent firstCategory={firstCategory} page={page} products={products} />;
+  return <>
+    <Head>
+      <title>{page.metaTitle}</title>
+      <meta name="description" content={page.metaDescription} />
+      <meta property="og:title" content={page.metaTitle} />
+      <meta property="og:description" content={page.metaDescription} />
+      <meta property="og:type" content="article" />
+    </Head>
+    <TopPageComponent firstCategory={firstCategory} page={page} products={products} />
+  </>;
 }
 
 export default withLayout(TopPage);
