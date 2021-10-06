@@ -87,25 +87,25 @@ const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewFormProp
                     <span className={styles.info}>* Перед публикацией отзыв пройдет предварительную модерацию и проверку</span>
                 </div>
             </div>
-            {isSuccess && <div className={clsx(styles.success, styles.panel)} role="alert">
+            {isSuccess && <div role="alert" className={clsx(styles.success, styles.panel)}>
                 <div className={styles.successTitle}>Ваш отзыв отправлен</div>
                 <div>
                     Спасибо, ваш отзыв будет опубликован после проверки.
                 </div>
                 <button
                     onClick={() => setIsSuccess(false)}
-                    className={styles.close}
                     aria-label="Закрыть оповещение"
+                    className={styles.close}
                 >
                     <CloseIcon />
                 </button>
             </div>}
-            {error && <div className={clsx(styles.error, styles.panel)} role="alert">
+            {error && <div role="alert" className={clsx(styles.error, styles.panel)}>
                 Что-то пошло не так, попробуйте обновить страницу
                 <button
                     onClick={() => setError(undefined)}
-                    className={styles.close}
                     aria-label="Закрыть оповещение"
+                    className={styles.close}
                 >
                     <CloseIcon />
                 </button>
