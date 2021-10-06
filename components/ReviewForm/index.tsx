@@ -45,7 +45,7 @@ const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewFormProp
                     placeholder='Имя'
                     error={errors.name}
                     tabIndex={isOpened ? 0 : -1}
-                    aria-invalid={errors.name ? true : false}
+                    aria-invalid={errors.name ? true : false} //To voice the error
                 />
                 <Input
                     {...register('title', { required: { value: true, message: 'Заполните заголовок' } })}
@@ -53,7 +53,7 @@ const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewFormProp
                     className={styles.title}
                     error={errors.title}
                     tabIndex={isOpened ? 0 : -1}
-                    aria-invalid={errors.title ? true : false}
+                    aria-invalid={errors.title ? true : false} //To voice the error
                 />
                 <div className={styles.rating}>
                     <span>Оценка:</span>
@@ -80,7 +80,7 @@ const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewFormProp
                     error={errors.description}
                     tabIndex={isOpened ? 0 : -1}
                     aria-label='Текст отзыва'
-                    aria-invalid={errors.description ? true : false}
+                    aria-invalid={errors.description ? true : false} //To voice the error
                 />
                 <div className={styles.submit}>
                     <Button appearance="primary" tabIndex={isOpened ? 0 : -1} onClick={() => clearErrors()}>Отправить</Button>

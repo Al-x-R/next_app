@@ -46,6 +46,7 @@ const Rating = forwardRef(({ isEditable = false, rating, setRating, error, tabIn
           ref={r => ratingArrayRef.current?.push(r)}
           tabIndex={computeFocus(rating, i)}
           onKeyDown={handleKey}
+          role={isEditable ? 'slider' : ''}
         >
           <StarIcon />
         </span>
@@ -96,7 +97,7 @@ const Rating = forwardRef(({ isEditable = false, rating, setRating, error, tabIn
       {ratingArray.map((r, i) => (
         <span key={i}>{r}</span>
       ))}
-      {error && <span role="alert" className={styles.errorMessage}>{error.message}</span>}
+      {error && <span className={styles.errorMessage} role="alert">{error.message}</span>}
     </div>
   );
 });
