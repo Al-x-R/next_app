@@ -52,9 +52,9 @@ const Menu = (): JSX.Element => {
 
   const buildFirstLevelMenu = () => {
     return(
-      <>
+      <ul className={styles.firstLevelList}>
         {firstLevelMenu.map(m => (
-          <div key={m.route}>
+          <li key={m.route} aria-expanded={m.id == firstCategory}>
             <Link href={`/${m.route}`}>
               <a>
                 <div className={clsx(styles.firstLevel, {
@@ -66,29 +66,30 @@ const Menu = (): JSX.Element => {
               </a>
             </Link>
             {m.id === firstCategory && buildSecondLevelMenu(m)}
-          </div>
+          </li>
         ))}
-      </>
+      </ul>
     );
   };
 
   const buildSecondLevelMenu = (menuItem: FirstLevelMenuItem) => {
     return (
-      <div className={styles.secondBlock}>
+      <ul className={styles.secondBlock}>
         {menu.map(m => {
           if (m.pages.map(p => p.alias).includes(router.asPath.split('/')[2])) {
             m.isOpened = true;
           }
 
           return (
-            <div key={m._id.secondCategory}>
-              <div className={styles.secondLevel}
-                   onClick={() => openSecondLevel(m._id.secondCategory)}
-                   tabIndex={0}
-                   onKeyDown={(key: KeyboardEvent) => openSecondLevelKey(key, m._id.secondCategory)}
+            <li key={m._id.secondCategory}>
+              <button className={styles.secondLevel}
+                      onClick={() => openSecondLevel(m._id.secondCategory)}
+                      tabIndex={0}
+                      onKeyDown={(key: KeyboardEvent) => openSecondLevelKey(key, m._id.secondCategory)}
+                      aria-expanded={m.isOpened}
               >
                 {m._id.secondCategory}
-              </div>
+              </button>
               <motion.div className={styles.secondLevelBlock}
                           layout
                           variants={variants}
@@ -96,10 +97,10 @@ const Menu = (): JSX.Element => {
                           animate={m.isOpened ? 'visible' : 'hidden'}>
                 {buildThirdLevelMenu(m.pages, menuItem.route, m.isOpened ?? false)}
               </motion.div>
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
     );
   };
 
@@ -110,6 +111,7 @@ const Menu = (): JSX.Element => {
             <Link href={`/${route}/${page.alias}`} >
               <a className={clsx(styles.thirdLevel, {[styles.thirdLevelActive]: `/${route}/${page.alias}` == router.asPath})}
                  tabIndex={isOpened ? 0 : -1}
+                 aria-current={`/${route}/${page.alias}` == router.asPath ? 'page' : false}
               >
                 {page.category}
               </a>
@@ -120,9 +122,9 @@ const Menu = (): JSX.Element => {
   };
 
   return (
-    <div className={styles.menu}>
+    <nav className={styles.menu}>
       {buildFirstLevelMenu()}
-    </div>
+    </nav>
   );
 };
 
