@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
+    "export": "next export",
     "stylelint": "stylelint \"**/*.css\" --fix ",
     "lint": "eslint . --ext .ts",
     "dev": "next dev",

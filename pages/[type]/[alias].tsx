@@ -11,6 +11,7 @@ import { MenuItem } from '../../interfaces/menu.interface';
 import { ProductModel } from '../../interfaces/product.interface';
 import { TopLevelCategory, TopPageModel } from '../../interfaces/page.interface';
 import { TopPageComponent } from '../../page-components/TopPageComponent';
+import { Error404 } from '../404';
 
 interface TopPageProps extends Record<string, unknown> {
   menu: MenuItem[];
@@ -20,6 +21,10 @@ interface TopPageProps extends Record<string, unknown> {
 }
 
 function TopPage({ firstCategory, page, products}: TopPageProps): JSX.Element {
+  if (!page || !products) {
+    return <Error404 />;
+  }
+
   return <>
     <Head>
       <title>{page.metaTitle}</title>
